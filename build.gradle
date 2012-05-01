@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 
 group = 'net.xelnaga'
-name = 'http-imposter'
+artifactId = 'http-imposter'
 version = "1.0.${new Date().format('yyMMdd.HHmm')}"
 
 sourceCompatibility = 1.6
