@@ -63,6 +63,14 @@ class HttpImposter {
         ImposterRequest imposterRequest = requestFactory.fromJson(json.request)
         ImposterResponse imposterResponse = responseFactory.fromJson(json.response)
 
+        log.info '\n>> [Http Imposter]: Received Configuration details'
+        log.info '>> ==================================='
+        log.info '>> == Request =='
+        log.info json.request
+        log.info '>> == Response =='
+        log.info json.response
+        log.info '>>'
+
         map.put(imposterRequest, imposterResponse)
     }
 
