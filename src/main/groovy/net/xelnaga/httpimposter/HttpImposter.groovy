@@ -66,9 +66,9 @@ class HttpImposter {
         log.info '\n>> [Http Imposter]: Received Configuration details'
         log.info '>> ==================================='
         log.info '>> == Request =='
-        log.info json.request
+        log.info gson.toJson(json.request)
         log.info '>> == Response =='
-        log.info json.response
+        log.info gson.toJson(json.response)
         log.info '>>'
 
         map.put(imposterRequest, imposterResponse)
