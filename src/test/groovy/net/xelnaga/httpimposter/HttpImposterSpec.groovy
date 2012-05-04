@@ -55,15 +55,18 @@ class HttpImposterSpec extends Specification {
 
             Gson mockJsonSlurper = mock(Gson, constructor())
             mockJsonSlurper.fromJson('{ "some": "json" }', HashMap).returns([ request: 'qwerty', response: 'asdfgh' ])
-        
+
+
             ImposterRequest imposterRequest = new ImposterRequest(body: 'apple')
             ImposterResponse imposterResponse = new ImposterResponse(body: 'pear')
             
             ImposterRequestFactory mockImposterRequestFactory = mock(ImposterRequestFactory, constructor())
             mockImposterRequestFactory.fromJson('qwerty').returns(imposterRequest)
+            mockJsonSlurper.toJson('qwerty').returns('')
 
             ImposterResponseFactory mockImposterResponseFactory = mock(ImposterResponseFactory, constructor())
             mockImposterResponseFactory.fromJson('asdfgh').returns(imposterResponse)
+            mockJsonSlurper.toJson('asdfgh').returns('')
         
         when:
             play {
