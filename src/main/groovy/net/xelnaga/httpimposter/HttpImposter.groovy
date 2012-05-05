@@ -44,10 +44,12 @@ class HttpImposter {
         ImposterResponse imposterResponse = map.get(imposterRequest)
 
         if (imposterResponse) {
-            logInteraction(imposterRequest, imposterResponse, true)
+            logMatchedRequest()
+            logInteraction(imposterRequest, imposterResponse)
             responseWriter.write(imposterResponse, httpResponse)
         } else {
-            logInteraction(imposterRequest, NO_MATCH, false)
+            logUnmatchedRequest()
+            logInteraction(imposterRequest, NO_MATCH)
             responseWriter.write(NO_MATCH, httpResponse)
         }
     }
@@ -63,13 +65,8 @@ class HttpImposter {
         ImposterRequest imposterRequest = requestFactory.fromJson(json.request)
         ImposterResponse imposterResponse = responseFactory.fromJson(json.response)
 
-        log.info '\n>> [Http Imposter]: Received Configuration details'
-        log.info '>> ==================================='
-        log.info '>> == Request =='
-        log.info gson.toJson(json.request)
-        log.info '>> == Response =='
-        log.info gson.toJson(json.response)
-        log.info '>>'
+        logConfigRequest()
+        logInteraction(imposterRequest,imposterResponse)
 
         map.put(imposterRequest, imposterResponse)
     }
@@ -86,9 +83,22 @@ class HttpImposter {
         map.clear()
     }
 
-    private void logInteraction(ImposterRequest imposterRequest, ImposterResponse imposterResponse, boolean matched) {
 
-        log.info matched ? '\n>> [Http Imposter]: Matched Request' : '\n>> [Http Imposter]: Unmatched Request'
+    private void logMatchedRequest(){
+        log.info'\n>> [Http Imposter]: Matched Request'
+    }
+
+    private void logUnmatchedRequest(){
+        log.info '\n>> [Http Imposter]: Unmatched Request'
+    }
+
+    private void logConfigRequest(){
+        log.info '\n>> [Http Imposter]: Configuration Request'
+    }
+
+
+    private void logInteraction(ImposterRequest imposterRequest, ImposterResponse imposterResponse) {
+
         log.info '>> ==================================='
         log.info imposterRequest.toString()
         log.info '>>'

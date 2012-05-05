@@ -62,11 +62,9 @@ class HttpImposterSpec extends Specification {
             
             ImposterRequestFactory mockImposterRequestFactory = mock(ImposterRequestFactory, constructor())
             mockImposterRequestFactory.fromJson('qwerty').returns(imposterRequest)
-            mockJsonSlurper.toJson('qwerty').returns('')
 
             ImposterResponseFactory mockImposterResponseFactory = mock(ImposterResponseFactory, constructor())
             mockImposterResponseFactory.fromJson('asdfgh').returns(imposterResponse)
-            mockJsonSlurper.toJson('asdfgh').returns('')
         
         when:
             play {
