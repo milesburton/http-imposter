@@ -40,7 +40,7 @@ class ImposterRequestFactorySpec extends Specification {
         when:
             ImposterRequest imposterRequest = null
             play {
-                imposterRequest = factory.fromHttpRequest(httpRequest)
+                imposterRequest = factory.fromHttpRequest(httpRequest, '/fruity/pineapple')
             }
 
         then:

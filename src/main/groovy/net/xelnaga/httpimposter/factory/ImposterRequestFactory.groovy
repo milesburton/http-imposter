@@ -11,10 +11,10 @@ class ImposterRequestFactory {
 
     HttpHeaderFilter filter = new PassThroughFilter()
 
-    ImposterRequest fromHttpRequest(HttpServletRequest httpRequest) {
+    ImposterRequest fromHttpRequest(HttpServletRequest httpRequest, String uri) {
 
         ImposterRequest imposterRequest = new ImposterRequest(
-                uri:    httpRequest.requestURI,
+                uri:    uri,
                 method: httpRequest.method,
                 body:   httpRequest.inputStream.text)
         

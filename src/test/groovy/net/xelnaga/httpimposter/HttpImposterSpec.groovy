@@ -83,14 +83,14 @@ class HttpImposterSpec extends Specification {
 
             HttpServletResponse httpResponse = new MockHttpServletResponse()
 
-            ImposterRequest imposterRequest = new ImposterRequestFactory().fromHttpRequest(httpRequest)
+            ImposterRequest imposterRequest = new ImposterRequestFactory().fromHttpRequest(httpRequest, 'mockuri')
             ImposterResponse imposterResponse = new ImposterResponse(status: 234, body: 'pear')
         
             httpImposter.put(imposterRequest, imposterResponse)
         
         when:
             play {
-                httpImposter.respond(httpRequest, httpResponse)    
+                httpImposter.respond('mockuri',httpRequest, httpResponse)
             }
         
         then:
@@ -107,7 +107,7 @@ class HttpImposterSpec extends Specification {
             HttpServletResponse httpResponse = new MockHttpServletResponse()
 
         when:
-            httpImposter.respond(httpRequest, httpResponse)
+            httpImposter.respond('mockuri',httpRequest, httpResponse)
 
         then:
             httpResponse.status == HttpServletResponse.SC_INTERNAL_SERVER_ERROR

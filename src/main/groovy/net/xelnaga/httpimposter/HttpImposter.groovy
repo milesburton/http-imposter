@@ -38,9 +38,9 @@ class HttpImposter {
         requestReader = new ImposterRequestFactory(filter: filter)
     }
 
-    void respond(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+    void respond(String uri, HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 
-        ImposterRequest imposterRequest = requestReader.fromHttpRequest(httpRequest)
+        ImposterRequest imposterRequest = requestReader.fromHttpRequest(httpRequest, uri)
         ImposterResponse imposterResponse = map.get(imposterRequest)
 
         if (imposterResponse) {
