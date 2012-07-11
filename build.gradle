@@ -14,7 +14,7 @@ repositories {
     mavenLocal()
     mavenCentral()
 
-    mavenRepo(url: 'http://build.mnetcs.com:8081/artifactory/public')
+    mavenRepo(url: 'http://artifactory.milesburton.com/public')
 }
 
 dependencies {
