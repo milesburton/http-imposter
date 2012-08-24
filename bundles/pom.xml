@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mb</groupId>
+    <artifactId>felix-http-imposter-suite</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-r${timestamp}</version>
+    <name>Http Imposter Suite</name>
+
+    <profiles>
+        <!-- Packaging profiles: choose one of these -->
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>felix-http-imposter</module>
+            </modules>
+        </profile>
+        <!-- /Packaging profiles: choose one of these -->
+
+        <!-- Installation target profiles: choose one of these -->
+        <profile>
+            <id>dev-local</id>
+            <properties>
+                <sling.url>http://10.7.203.32:4503/system/console/install</sling.url>
+                <sling.user>admin</sling.user>
+                <sling.password>admin</sling.password>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <modules>
+                <module>felix-http-imposter</module>
+            </modules>
+        </profile>
+        <!-- /Installation target profiles: choose one of these -->
+    </profiles>
+
+    <properties>
+        <powermock.version>1.4.12</powermock.version>
+    </properties>
+
+    <dependencies>
+        <!-- BEGIN OSGi dependencies -->
+        <dependency>
+            <groupId>org.eclipse.osgi</groupId>
+            <artifactId>org.eclipse.osgi</artifactId>
+            <version>3.7.1.R37x_v20110808-1106</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.osgi</groupId>
+            <artifactId>org.eclipse.osgi.services</artifactId>
+            <version>3.3.0.v20110513</version>
+        </dependency>
+        <!-- END OSGi dependencies -->
+
+        <!-- BEGIN Groovy dependencies -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>1.6.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy.maven.runtime</groupId>
+            <artifactId>gmaven-runtime-default</artifactId>
+            <version>1.0-rc-3</version>
+        </dependency>
+
+        <!-- END Groovy dependencies -->
+        <!-- BEGIN Sling dependencies -->
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.api</artifactId>
+            <version>2.0.8</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.event</artifactId>
+            <version>2.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.annotations</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
+        <!-- /Sling -->
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- BEGIN Groovy plugins -->
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- END Groovy plugins -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- BEGIN OSGi plugins -->
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- END OSGi plugins -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create-timestamp</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <format>{0,date,yyyyMMddHHmmss}</format>
+                    <items>
+                        <item>timestamp</item>
+                    </items>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>maven-sling-plugin</artifactId>
+                <version>2.1.0</version>
+                <executions>
+                    <execution>
+                        <id>install-bundle</id>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                        <configuration>
+                            <slingUrl>${sling.url}</slingUrl>
+                            <user>${sling.user}</user>
+                            <password>${sling.password}</password>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <repositories>
+        <repository>
+            <id>com.springsource.repository.bundles.release</id>
+            <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/release</url>
+        </repository>
+
+        <repository>
+            <id>com.springsource.repository.bundles.external</id>
+            <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+        </repository>
+
+        <repository>
+            <id>com.springsource.repository.libraries.release</id>
+            <name>SpringSource Enterprise Bundle Repository - SpringSource Library Releases</name>
+            <url>http://repository.springsource.com/maven/libraries/release</url>
+        </repository>
+
+        <repository>
+            <id>com.springsource.repository.libraries.external</id>
+            <name>SpringSource Enterprise Bundle Repository - External Library Releases</name>
+            <url>http://repository.springsource.com/maven/libraries/external</url>
+        </repository>
+
+        <repository>
+            <id>com.milesburton.com.public</id>
+            <name>Artifactory instance to serve as backup for springsource</name>
+            <url>http://artifactory.milesburton.com/public</url>
+        </repository>
+    </repositories>
+</project>

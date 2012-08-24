@@ -1,24 +1,24 @@
 package net.xelnaga.httpimposter
 
-
-
 import com.google.gson.Gson
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 import net.xelnaga.httpimposter.factory.ImposterRequestFactory
 import net.xelnaga.httpimposter.factory.ImposterResponseFactory
 import net.xelnaga.httpimposter.filter.HttpHeaderFilter
 import net.xelnaga.httpimposter.model.HttpHeader
 import net.xelnaga.httpimposter.model.ImposterRequest
 import net.xelnaga.httpimposter.model.ImposterResponse
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
 class HttpImposter {
 
-    Logger log = Logger.getLogger(HttpImposter)
+    Logger log = LoggerFactory.getLogger(HttpImposter)
 
     static final NO_MATCH = new ImposterResponse(
-            status: HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+            status: 500,
             headers: [
                     new HttpHeader('Content-Type', 'text/plain')
             ],
@@ -61,12 +61,12 @@ class HttpImposter {
 
         Gson gson = new Gson()
         Map json = gson.fromJson(httpRequest.inputStream.text, HashMap)
-        
+
         ImposterRequest imposterRequest = requestFactory.fromJson(json.request)
         ImposterResponse imposterResponse = responseFactory.fromJson(json.response)
 
         logConfigRequest()
-        logInteraction(imposterRequest,imposterResponse)
+        logInteraction(imposterRequest, imposterResponse)
 
         map.put(imposterRequest, imposterResponse)
     }
@@ -84,15 +84,15 @@ class HttpImposter {
     }
 
 
-    private void logMatchedRequest(){
-        log.info'\n>> [Http Imposter]: Matched Request'
+    private void logMatchedRequest() {
+        log.info '\n>> [Http Imposter]: Matched Request'
     }
 
-    private void logUnmatchedRequest(){
+    private void logUnmatchedRequest() {
         log.info '\n>> [Http Imposter]: Unmatched Request'
     }
 
-    private void logConfigRequest(){
+    private void logConfigRequest() {
         log.info '\n>> [Http Imposter]: Configuration Request'
     }
 
