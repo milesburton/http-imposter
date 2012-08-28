@@ -19,16 +19,26 @@ class ImposterServlet extends SlingSafeMethodsServlet {
     private static final HttpHeaderFilter FILTER = new HeaderNameExclusionFilter(['Host', 'User-Agent', 'Connection', 'Content-Length'])
     private static final HttpImposter IMPOSTER = new HttpImposter(filter: FILTER)
 
-    void doGeneric(SlingHttpServletRequest request, SlingHttpServletResponse response) {
+    void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) {
+        process(request,response)
+    }
 
-        if (request.requestURI.endsWith("/configure")) {
+    void handleMethodNotImplemented(SlingHttpServletRequest request, SlingHttpServletResponse response) {
+        process(request,response)
+    }
+
+    void process(SlingHttpServletRequest request, SlingHttpServletResponse response) {
+
+        if (request.queryString.endsWith("/configure")) {
             IMPOSTER.configure(request)
-        } else if (request.requestURI.endsWith("/reset")) {
+        } else if (request.queryString.endsWith("/reset")) {
             IMPOSTER.reset()
+        }else if (request.queryString.endsWith("/test")){
+            response.writer.println("Ready")
         } else {
             IMPOSTER.respond("${request.requestURI}?${request.queryString}", request, response)
         }
     }
-
+    =
 
 }
