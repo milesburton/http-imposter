@@ -23,58 +23,16 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.6</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <!-- RestClient -->
-        <dependency>
-            <groupId>com.popcornteam</groupId>
-            <artifactId>restclient-groovy-1.6.4</artifactId>
-            <version>1.0.120822.1336</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>4.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
+            <groupId>net.xelnaga</groupId>
+            <artifactId>http-imposter-groovy-1.6.4</artifactId>
+            <version>1.0.120828.1359</version>
         </dependency>
         <dependency>
             <groupId>org.joda</groupId>
             <artifactId>joda-convert</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <version>1.2</version>
         </dependency>
 
-        <!-- /RestClient -->
     </dependencies>
 
     <build>
@@ -121,25 +79,27 @@
                             !org.ietf.jgss,
                             !org.apache.avalon.framework.logger,
                             !org.apache.log,
-                            !org.apache.log4j,
+                            !org.apache.log4j
                         </Import-Package>
                         <Include-Resource>
                             {maven-resources}
                         </Include-Resource>
                         <Embed-Dependency>
                             commons-httpclient,
-                            joda-convert;scope=compile,
-                            joda-time;scope=compile,
-                            autonomy-aci;scope=compile,
-                            commons-codec,
-                            httpclient,
-                            httpmime,
+                            joda-convert,
+                            joda-time
                             commons-io;scope=compile,
                             commons-logging;scope=compile,
                             gson;scope=compile,
                             joda-time;scope=compile,
                             guava;scope=compile,
-                            restclient-groovy-1.6.4;scope=compile,
+                            http-imposter-groovy-1.6.4,
+                            restclient-groovy-1.6.4,
+                            httpclient,
+                            httpcore,
+                            httpmime,
+                            commons-codec,
+                            commons-lang
                         </Embed-Dependency>
                         <Bundle-ClassPath>.,{maven-dependencies}</Bundle-ClassPath>
                         <Embed-Transitive>true</Embed-Transitive>
