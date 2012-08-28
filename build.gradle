@@ -2,6 +2,7 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
+
 group = 'net.xelnaga'
 artifactId = 'http-imposter-groovy-1.6.4'
 version = "1.0.${new Date().format('yyMMdd.HHmm')}"
@@ -26,12 +27,7 @@ dependencies {
             "com.google.code.gson:gson:2.0",
             'commons-codec:commons-codec:1.6',
             'commons-lang:commons-lang:2.6',
-            // RestClient deps
-            'com.popcornteam:restclient-groovy-1.6.4:1.0.120822.1336',
-            "org.apache.httpcomponents:httpclient:4.1.2",
-            "org.apache.httpcomponents:httpmime:4.1.2",
-            "joda-time:joda-time:2.0"
-            // /RestClient deps
+            'com.popcornteam:restclient-groovy-1.6.4:1.0.120828.1353'
 
     testCompile 'org.spockframework:spock-core:0.6-groovy-1.8',
                 'org.gmock:gmock:0.8.2',
