@@ -79,7 +79,24 @@
                             !org.ietf.jgss,
                             !org.apache.avalon.framework.logger,
                             !org.apache.log,
-                            !org.apache.log4j
+                            !com.ibm.uvm.tools,
+                            !com.sun.jdmk.comm,
+                            !javax.jmdns,
+                            !javax.jms,
+                            !javax.mail,
+                            !javax.mail.internet,
+                            !javax.management,
+                            !javax.naming,
+                            !javax.swing,
+                            !javax.swing.border,
+                            !javax.swing.event,
+                            !javax.swing.table,
+                            !javax.swing.text,
+                            !javax.swing.tree,
+                            !javax.xml.parsers,
+                            !org.w3c.dom,
+                            !org.xml.sax,
+                            !org.xml.sax.helpers
                         </Import-Package>
                         <Include-Resource>
                             {maven-resources}
@@ -99,7 +116,8 @@
                             httpcore,
                             httpmime,
                             commons-codec,
-                            commons-lang
+                            commons-lang,
+                            log4j
                         </Embed-Dependency>
                         <Bundle-ClassPath>.,{maven-dependencies}</Bundle-ClassPath>
                         <Embed-Transitive>true</Embed-Transitive>

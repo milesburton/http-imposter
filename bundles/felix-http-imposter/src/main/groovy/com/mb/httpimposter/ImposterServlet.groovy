@@ -12,7 +12,6 @@ import org.apache.sling.api.servlets.SlingSafeMethodsServlet
  * @scr.service interface="javax.servlet.Servlet"
  * @scr.property name="service.description" value="HTTP Imposter for Apache Felix"
  * @scr.property name="service.vendor" value="milesburton.com"
- * @scr.property name="sling.servlet.methods" value="GET"
  * @scr.property name="sling.servlet.paths" value="/bin/mb/imposter"
  */
 class ImposterServlet extends SlingSafeMethodsServlet {
@@ -20,7 +19,7 @@ class ImposterServlet extends SlingSafeMethodsServlet {
     private static final HttpHeaderFilter FILTER = new HeaderNameExclusionFilter(['Host', 'User-Agent', 'Connection', 'Content-Length'])
     private static final HttpImposter IMPOSTER = new HttpImposter(filter: FILTER)
 
-    void service(SlingHttpServletRequest request, SlingHttpServletResponse response) {
+    void doGeneric(SlingHttpServletRequest request, SlingHttpServletResponse response) {
 
         if (request.requestURI.endsWith("/configure")) {
             IMPOSTER.configure(request)
