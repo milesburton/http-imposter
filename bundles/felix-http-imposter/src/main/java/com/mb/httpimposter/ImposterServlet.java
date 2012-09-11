@@ -53,7 +53,8 @@ public class ImposterServlet extends SlingAllMethodsServlet implements OptingSer
     void process(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
 
         String qs = request.getQueryString() != null ? request.getQueryString() : "";
-        String uri = request.getRequestURI() + "?" + qs;
+        String uri = request.getRequestURI();
+        if(qs.length()>0) uri += "?" + qs;
 
         log.info("Http Imposter responding to: " + uri);
 
