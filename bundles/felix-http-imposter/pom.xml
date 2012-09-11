@@ -25,7 +25,7 @@
         <dependency>
             <groupId>net.xelnaga</groupId>
             <artifactId>http-imposter-groovy-1.6.4</artifactId>
-            <version>1.0.120828.1359</version>
+            <version>1.0.120911.1324</version>
         </dependency>
         <dependency>
             <groupId>org.joda</groupId>

@@ -26,7 +26,7 @@
         <profile>
             <id>dev-local</id>
             <properties>
-                <sling.url>http://10.7.203.32:4503/system/console/install</sling.url>
+                <sling.url>http://192.168.164.130:4503/system/console/install</sling.url>
                 <sling.user>admin</sling.user>
                 <sling.password>admin</sling.password>
                 <maven.test.skip>true</maven.test.skip>
