@@ -16,7 +16,7 @@ class ImposterRequestFactory {
         ImposterRequest imposterRequest = new ImposterRequest(
                 uri:    uri,
                 method: httpRequest.method,
-                body:   httpRequest.inputStream.text)
+                body:   httpRequest.inputStream ? httpRequest.inputStream.text : "")
         
         httpRequest.headerNames.each { String name ->
 
