@@ -25,7 +25,7 @@ dependencies {
             "com.google.code.gson:gson:2.0",
             'commons-codec:commons-codec:1.6',
             'commons-lang:commons-lang:2.6',
-            'com.popcornteam:restclient:1.0.130111.1328'
+            'com.popcornteam:restclient:1.0.130719.1658'
 
     testCompile 'org.spockframework:spock-core:0.6-groovy-1.8',
                 'org.gmock:gmock:0.8.2',
